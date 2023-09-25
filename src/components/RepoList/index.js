@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "semantic-ui-react";
 import RepoItem from "../RepoItem";
 
@@ -16,32 +16,24 @@ const RepoList = ({ userdata }) => {
           allRepos: res,
         })
       );
-  }, [rpState.allRepos]);
+  }, [userdata.repos_url]);
 
   return (
     rpState.allRepos && (
-      <Card.Content className='mycontent repo-list'>
-        <div className='h4-container'>
+      <Card.Content className="mycontent repo-list">
+        <div className="h4-container">
           <h4>Repos:</h4>
         </div>
-        <div className='list-container'>
-          <div className='repos-listed'>
+        <div className="list-container">
+          <div className="repos-listed">
             {rpState.allRepos.map((repo, i) => {
-              return (
-                <RepoItem name={repo.name} url={repo.html_url} id={i} key={i} />
-              );
+              return <RepoItem name={repo.name} url={repo.html_url} id={i} key={i} />;
             })}
           </div>
           {userdata.public_repos >= 15 && (
-            <a
-              href={`https://github.com/${userdata.login}?tab=repositories`}
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <div className='github-linkto'>
-                <p>{`See All Repositories (${
-                  userdata.public_repos - 15
-                } more...)`}</p>
+            <a href={`https://github.com/${userdata.login}?tab=repositories`} rel="noopener noreferrer" target="_blank">
+              <div className="github-linkto">
+                <p>{`See All Repositories (${userdata.public_repos - 15} more...)`}</p>
               </div>
             </a>
           )}

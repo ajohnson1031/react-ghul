@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Container, Card } from "semantic-ui-react";
-import GitHubCalendar from "react-github-calendar";
+import React, { useEffect, useState } from "react";
+import { Card, Container } from "semantic-ui-react";
+import FollowCard from "../FollowCard";
+import RepoList from "../RepoList";
 import SearchForm from "../SearchForm";
 import UserDetails from "../UserDetails";
-import RepoList from "../RepoList";
-import FollowCard from "../FollowCard";
 
 const UserCard = () => {
   const [appState, setAppState] = useState({
@@ -32,21 +31,18 @@ const UserCard = () => {
 
   return (
     appState.userdata && (
-      <Container className='main-wrapper'>
+      <Container className="main-wrapper">
         <Card>
           <Card.Header>
             <SearchForm appState={appState} onFormSubmit={setAppState} />
             <h1>GitHub User: {appState.username}</h1>
           </Card.Header>
-          <Card.Content className='content user-calendar'>
+          {/* <Card.Content className='content user-calendar'>
             <GitHubCalendar username={appState.username} theme={orangeTheme} />
-          </Card.Content>
+          </Card.Content> */}
           <UserDetails userDetails={appState.userdata} />
           <RepoList userdata={appState.userdata} />
-          <FollowCard
-            followLink={appState.userdata.followers_url}
-            name={appState.userdata.login}
-          />
+          <FollowCard followLink={appState.userdata.followers_url} name={appState.userdata.login} />
         </Card>
       </Container>
     )
